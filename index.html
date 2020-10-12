@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>主页</title>
+    <script src='../js/vue.js'></script>
+<style>
+    #app {
+        /* 弹性盒需要设置在父级上 */
+        display:flex;
+    }
+    #sidebar {
+        width:290px;
+        height:600px;
+        overflow-x:hidden;
+        overflow-y:scoll;
+    }
+    #sidebar li {
+        margin-top:0.5em;
+    }
+    #sidebar li a {
+        font-size:20px;
+        text-decoration:none;
+    }
+    #sidebar li a:hover {
+        text-decoration:underline rgb(66,185,131);
+    }
+    #sidebarLeft {
+        width:260px;
+        height:100%;
+        padding:35px 0px 60px 20px;
+    }
+    .showColor {
+        color:black;
+    }
+    .showColor2 {
+        color:rgb(66,185,131);
+    }
+
+    #content {
+        width:1050px;
+        height:600px;
+        overflow-x:hidden;
+        overflow-y:auto;
+        background:rgb(248,248,248);
+        /* background:rgb(248,248,248); */
+
+    }
+</style>
+</head>
+
+<body>
+    <div id="app">
+        <div id="sidebar" >
+            <div id="sidebarLeft">
+            <ul>
+                <li v-for="(items,index) in mainA">
+                    <a :href="hrefs[index]"
+                    @click="aClick(index)"
+                    :class="{showColor:true,showColor2:currentIndex == index}"
+                    >{{items}}</a>
+                </li>
+            </ul>
+            </div>
+        </div>
+        <div id="content">
+            <div id="contentRight">
+
+            </div>
+        </div>     
+    </div>
+    
+    <script src="js/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data: {
+                mainA: ['个人简历','计数器组件','#','#','#','#','#','#','#','#','#','#','#','#','#','#'],
+                hrefs: ['html/index.html','html/i2.html','a','a','a','a','a','a','a',],
+                currentIndex:-1,
+            },
+            methods: {
+                aClick(index) {
+                    this.currentIndex = index;
+                }
+            }
+        });
+    </script>
+    <script>
+        let contentRight = document.getElementById('contentRight');
+        let oDiv1 = document.createElement('div');
+        contentRight.appendChild(oDiv1);
+        oDiv1.innerText = `
+        请点击左侧的链接
+        `;
+    </script>
+</body>
+
+</html>
